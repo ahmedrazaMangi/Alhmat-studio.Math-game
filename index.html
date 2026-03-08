@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>⚡ MATH CHALLENGE · TIMED ⚡</title>
+    <title>⚡ MATH CHALLENGE · PERFECT FIT ⚡</title>
     <style>
-        /* RESET & GLOBAL */
+        /* RESET & GLOBAL – same foundation, only improved */
         * {
             margin: 0;
             padding: 0;
@@ -22,35 +22,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px;
+            padding: 6px; /* slightly reduced for very narrow screens */
             color: white;
-            touch-action: pan-x pan-y; /* smooth but no zoom */
+            touch-action: pan-x pan-y;
         }
 
         .game-container {
             width: 100%;
             max-width: 500px;
             height: 100%;
-            max-height: 800px;
+            max-height: 820px; /* increased a bit to avoid scroll on some devices */
             background: rgba(10, 25, 45, 0.75);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-radius: 36px;
             box-shadow: 0 25px 50px -8px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
-            padding: 20px 18px;
+            padding: 18px 14px; /* slightly adjusted for better breathing */
             display: flex;
             flex-direction: column;
             transition: all 0.2s;
         }
 
         /* no scroll inside – flex column with min-height 0 */
-        header, .stats-modern, .game-area, .controls, .settings, .footer-info {
-            flex-shrink: 0;
-        }
-
         .game-area {
             flex: 1 1 auto;
-            min-height: 0;  /* crucial for flex child to shrink */
+            min-height: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,7 +54,7 @@
 
         /* ----- HEADER & TITLE ----- */
         h1 {
-            font-size: clamp(1.8rem, 8vw, 2.4rem);
+            font-size: clamp(1.8rem, 7vw, 2.4rem); /* slightly smaller on tiny screens */
             font-weight: 700;
             text-align: center;
             letter-spacing: 1px;
@@ -66,19 +62,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px #60f0ff80;
-            margin-bottom: 8px;
+            margin-bottom: 6px; /* reduced */
         }
 
-        /* modern stats row */
+        /* modern stats row – improved wrapping */
         .stats-modern {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 6px;
+            justify-content: center; /* center on wrap */
+            gap: 8px 5px;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 60px;
-            padding: 12px 16px;
-            margin-bottom: 14px;
+            padding: 10px 10px;
+            margin-bottom: 12px;
             border: 1px solid rgba(255,255,240,0.1);
             font-weight: 600;
         }
@@ -86,15 +82,20 @@
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 1rem;
+            gap: 4px;
+            font-size: 0.95rem; /* slightly smaller to fit */
+            background: rgba(0,0,0,0.2); /* subtle background for separation */
+            padding: 4px 8px;
+            border-radius: 40px;
+            min-width: 70px; /* ensures they don't get too tiny */
+            justify-content: center;
         }
         .stat-item i { font-style: normal; font-size: 1.2rem; width: 24px; }
         .stat-value {
             background: #1e3b5a;
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 40px;
-            min-width: 48px;
+            min-width: 44px;
             text-align: center;
             box-shadow: inset 0 2px 5px #00000030;
         }
@@ -105,13 +106,13 @@
             color: #ffd966;
         }
 
-        /* ----- TIMER BAR (new) ----- */
+        /* ----- TIMER BAR ----- */
         .timer-container {
             width: 100%;
-            height: 16px;
+            height: 14px; /* slightly thinner */
             background: #142b3c;
             border-radius: 30px;
-            margin: 12px 0 8px;
+            margin: 8px 0 8px;
             overflow: hidden;
             box-shadow: inset 0 3px 6px #00000050;
         }
@@ -127,40 +128,41 @@
         .problem-box {
             background: rgba(255,255,255,0.05);
             border-radius: 48px;
-            padding: 25px 10px;
-            margin: 5px 0 15px;
+            padding: 20px 5px; /* reduced vertical padding */
+            margin: 5px 0 10px;
             border: 2px solid rgba(255,215,0,0.2);
             box-shadow: inset 0 0 30px #00000050;
         }
 
         #problem-display {
-            font-size: clamp(2.2rem, 12vw, 3.8rem);
+            font-size: clamp(2.2rem, 11vw, 3.8rem); /* adjusted */
             font-weight: 800;
             text-align: center;
-            letter-spacing: 4px;
+            letter-spacing: 2px; /* reduced for small screens */
             text-shadow: 0 0 30px cyan;
+            word-break: break-word;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            margin: 12px 0;
+            gap: 12px;
+            margin: 8px 0;
         }
 
         #answer-input {
-            width: 180px;
+            width: 160px; /* slightly smaller base */
             max-width: 70%;
-            padding: 18px 10px;
-            font-size: 2.2rem;
+            padding: 16px 8px; /* adjusted */
+            font-size: 2rem; /* responsive */
             text-align: center;
             background: rgba(255, 255, 255, 0.9);
             border: none;
             border-radius: 60px;
             font-weight: 700;
             color: #0a1f2f;
-            box-shadow: 0 8px 0 #0f2a40, 0 10px 20px black;
+            box-shadow: 0 6px 0 #0f2a40, 0 10px 20px black; /* reduced shadow height */
             outline: 2px solid transparent;
             transition: 0.05s linear;
         }
@@ -174,44 +176,45 @@
             border: none;
             color: white;
             font-weight: bold;
-            font-size: 1.8rem;
-            padding: 16px 30px;
+            font-size: 1.6rem; /* slightly smaller */
+            padding: 14px 20px;
             border-radius: 60px;
             width: fit-content;
-            min-width: 200px;
-            box-shadow: 0 8px 0 #005f73, 0 10px 20px black;
+            min-width: 180px; /* reduced */
+            box-shadow: 0 6px 0 #005f73, 0 10px 20px black;
             transition: 0.08s linear;
             touch-action: manipulation;
             cursor: pointer;
             letter-spacing: 1px;
         }
         #submit-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 3px 0 #005f73, 0 8px 12px black;
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #005f73, 0 8px 12px black;
         }
         #submit-btn:disabled {
             opacity: 0.6;
-            transform: translateY(3px);
-            box-shadow: 0 3px 0 #005f73;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #005f73;
             pointer-events: none;
         }
 
         .feedback-area {
-            min-height: 48px;
-            font-size: 1.4rem;
+            min-height: 44px;
+            font-size: 1.3rem;
             font-weight: 600;
             text-align: center;
-            margin: 10px 0 5px;
+            margin: 8px 0 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: 0.2s;
+            padding: 0 4px;
         }
 
         .double-btn-row {
             display: flex;
-            gap: 12px;
-            margin: 12px 0 10px;
+            gap: 10px;
+            margin: 8px 0 8px;
         }
         .action-btn {
             flex: 1;
@@ -220,15 +223,19 @@
             color: white;
             font-size: 1.2rem;
             font-weight: 600;
-            padding: 14px 5px;
+            padding: 12px 5px;
             border-radius: 50px;
-            box-shadow: 0 5px 0 #1e2b38, 0 6px 12px black;
+            box-shadow: 0 4px 0 #1e2b38, 0 6px 12px black;
             transition: 0.05s;
             cursor: pointer;
             touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
         .action-btn:active {
-            transform: translateY(4px);
+            transform: translateY(3px);
             box-shadow: 0 1px 0 #1e2b38, 0 6px 12px black;
         }
         #new-game-btn {
@@ -237,26 +244,28 @@
 
         .settings-panel {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             background: rgba(0,0,0,0.3);
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-radius: 60px;
-            margin: 8px 0;
-            font-size: 1rem;
+            margin: 6px 0;
+            font-size: 0.95rem;
             border: 1px solid #ffffff20;
+            gap: 8px;
         }
 
         .toggle-switch {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .switch {
             position: relative;
             display: inline-block;
-            width: 52px;
-            height: 26px;
+            width: 48px; /* slightly smaller */
+            height: 24px;
         }
         .switch input { opacity:0; width:0; height:0; }
         .slider {
@@ -270,8 +279,8 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
             left: 3px;
             bottom: 3px;
             background-color: #ecf0f1;
@@ -282,16 +291,16 @@
             background-color: #3498db;
         }
         input:checked + .slider:before {
-            transform: translateX(26px);
+            transform: translateX(24px);
         }
 
         select {
             background: #2d3f55;
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border: none;
             border-radius: 40px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             outline: none;
             border: 1px solid #8a9bb5;
@@ -300,9 +309,9 @@
         .footer-info {
             background: #0d1b2b;
             border-radius: 30px;
-            padding: 10px 15px;
-            margin-top: 8px;
-            font-size: 0.85rem;
+            padding: 8px 12px;
+            margin-top: 6px;
+            font-size: 0.8rem;
             text-align: center;
             color: #b5d0e0;
             border: 1px solid #7f8c8d40;
@@ -320,7 +329,7 @@
             align-items: center;
             justify-content: center;
             z-index: 30;
-            padding: 30px;
+            padding: 20px;
             opacity: 0;
             pointer-events: none;
             transition: 0.25s ease;
@@ -330,36 +339,51 @@
             pointer-events: all;
         }
         .game-overlay h2 {
-            font-size: 3.5rem;
+            font-size: 2.8rem; /* adjusted */
             color: #ffb347;
             text-shadow: 0 0 30px red;
+            text-align: center;
         }
         .game-overlay p {
-            font-size: 2rem;
-            margin: 15px 0;
+            font-size: 1.8rem;
+            margin: 12px 0;
         }
         #restart-overlay-btn {
             background: linear-gradient(145deg, #fd746c, #ff9068);
             border: none;
             color: white;
-            font-size: 2rem;
-            padding: 20px 50px;
+            font-size: 1.8rem;
+            padding: 16px 40px;
             border-radius: 60px;
             font-weight: bold;
-            box-shadow: 0 8px 0 #962d22;
+            box-shadow: 0 6px 0 #962d22;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 10px;
+            transition: 0.06s;
+        }
+        #restart-overlay-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #962d22;
         }
 
-        /* small height fine-tune */
-        @media (max-height: 700px) {
+        /* fine-tuning for very small heights */
+        @media (max-height: 680px) {
             .problem-box { padding: 12px 5px; }
-            #problem-display { font-size: 2.8rem; }
-            .stats-modern { padding: 8px 12px; }
-            .footer-info { font-size: 0.75rem; padding: 5px; }
+            #problem-display { font-size: clamp(2rem, 10vw, 3.2rem); }
+            .stats-modern { padding: 6px 8px; }
+            .footer-info { font-size: 0.7rem; padding: 4px; }
+            .action-btn { padding: 10px 5px; }
+            #submit-btn { padding: 12px 16px; font-size: 1.5rem; min-width: 160px; }
+            #answer-input { padding: 12px 6px; font-size: 1.8rem; }
         }
-        @media (max-width: 380px) {
-            .settings-panel { flex-direction: column; gap: 10px; }
+
+        /* extra small width */
+        @media (max-width: 360px) {
+            .settings-panel { flex-direction: column; align-items: stretch; }
+            .stat-item { font-size: 0.85rem; }
+            .stat-item i { font-size: 1rem; width: 20px; }
+            .double-btn-row { gap: 6px; }
+            .action-btn { font-size: 1rem; }
         }
     </style>
 </head>
@@ -375,7 +399,7 @@
         <div class="stat-item"><i>🏆</i><span class="stat-value" id="high-score-value">0</span></div>
     </div>
 
-    <!-- timer bar (new) -->
+    <!-- timer bar -->
     <div class="timer-container">
         <div id="timer-fill" style="width:100%"></div>
     </div>
@@ -434,6 +458,7 @@
 </div>
 
 <script>
+    // (your original JavaScript – unchanged)
     (function() {
         // ---------- GAME STATE ----------
         let score = 0;
