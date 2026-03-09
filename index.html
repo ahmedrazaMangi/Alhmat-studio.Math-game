@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>⚡ MATH CHALLENGE · PERFECT FIT ⚡</title>
+    <title>⚡ MATH · ULTRA CLEAN ⚡</title>
     <style>
-        /* RESET & GLOBAL – same foundation, only improved */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +21,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6px; /* slightly reduced for very narrow screens */
+            padding: 6px;
             color: white;
             touch-action: pan-x pan-y;
         }
@@ -31,457 +30,435 @@
             width: 100%;
             max-width: 500px;
             height: 100%;
-            max-height: 820px; /* increased a bit to avoid scroll on some devices */
+            max-height: 820px;
             background: rgba(10, 25, 45, 0.75);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-radius: 36px;
             box-shadow: 0 25px 50px -8px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
-            padding: 18px 14px; /* slightly adjusted for better breathing */
+            padding: 20px 16px;
             display: flex;
             flex-direction: column;
-            transition: all 0.2s;
+            border: 2px solid rgba(255,215,0,0.2);
         }
 
-        /* no scroll inside – flex column with min-height 0 */
-        .game-area {
-            flex: 1 1 auto;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* ----- HEADER & TITLE ----- */
         h1 {
-            font-size: clamp(1.8rem, 7vw, 2.4rem); /* slightly smaller on tiny screens */
+            font-size: clamp(1.8rem, 7vw, 2.4rem);
             font-weight: 700;
             text-align: center;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #b0e0ff, #f0d3ff);
+            background: linear-gradient(135deg, #ffe68f, #ffb77a, #dbb5ff);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px #60f0ff80;
-            margin-bottom: 6px; /* reduced */
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px #f0b37b;
         }
 
-        /* modern stats row – improved wrapping */
-        .stats-modern {
+        /* stats row – even spacing, no overlap */
+        .stats-row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* center on wrap */
-            gap: 8px 5px;
-            background: rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            gap: 12px 10px;
+            background: rgba(0,0,0,0.25);
             border-radius: 60px;
-            padding: 10px 10px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255,255,240,0.1);
-            font-weight: 600;
+            padding: 12px 12px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255,255,200,0.2);
         }
 
-        .stat-item {
+        .stat-pill {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 0.95rem; /* slightly smaller to fit */
-            background: rgba(0,0,0,0.2); /* subtle background for separation */
-            padding: 4px 8px;
-            border-radius: 40px;
-            min-width: 70px; /* ensures they don't get too tiny */
+            gap: 6px;
+            background: #1f3a58;
+            padding: 8px 18px;
+            border-radius: 50px;
+            box-shadow: inset 0 2px 6px #00000060, 0 4px 0 #0f2032;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 100px;
             justify-content: center;
         }
-        .stat-item i { font-style: normal; font-size: 1.2rem; width: 24px; }
-        .stat-value {
-            background: #1e3b5a;
-            padding: 4px 8px;
-            border-radius: 40px;
-            min-width: 44px;
+        .stat-pill i { font-style: normal; font-size: 1.4rem; width: 30px; }
+        .stat-pill span { 
+            background: #0e223a; 
+            padding: 4px 12px; 
+            border-radius: 40px; 
+            min-width: 48px; 
             text-align: center;
-            box-shadow: inset 0 2px 5px #00000030;
+            box-shadow: inset 0 1px 4px black;
         }
+        #high-score-pill { background: #4a2f6a; }
 
-        /* high score special */
-        #high-score-value {
-            background: #5f2b6e;
-            color: #ffd966;
-        }
-
-        /* ----- TIMER BAR ----- */
-        .timer-container {
+        /* timer bar – isolated */
+        .timer-section {
             width: 100%;
-            height: 14px; /* slightly thinner */
-            background: #142b3c;
+            margin: 5px 0 20px;
+        }
+        .timer-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: #c6e0ff;
+        }
+        .timer-bar {
+            width: 100%;
+            height: 14px;
+            background: #0e2338;
             border-radius: 30px;
-            margin: 8px 0 8px;
             overflow: hidden;
-            box-shadow: inset 0 3px 6px #00000050;
+            border: 1px solid #3f6180;
+            box-shadow: inset 0 4px 8px #00000080;
         }
         #timer-fill {
             height: 100%;
             width: 100%;
-            background: linear-gradient(90deg, #62ff8e, #ffd966, #ff7b7b);
-            border-radius: 30px;
+            background: linear-gradient(90deg, #4aff8a, #ffd966, #ff7b7b);
             transition: width 0.1s linear;
-            box-shadow: 0 0 20px #88ffa0;
+            box-shadow: 0 0 20px #9effb0;
         }
 
-        .problem-box {
+        /* problem box – distinct */
+        .problem-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 48px;
-            padding: 20px 5px; /* reduced vertical padding */
-            margin: 5px 0 10px;
-            border: 2px solid rgba(255,215,0,0.2);
-            box-shadow: inset 0 0 30px #00000050;
+            border-radius: 70px;
+            padding: 25px 10px;
+            margin: 10px 0 20px;
+            border: 2px solid rgba(255,200,80,0.35);
+            box-shadow: inset 0 0 50px #00000090, 0 15px 30px black;
         }
-
         #problem-display {
-            font-size: clamp(2.2rem, 11vw, 3.8rem); /* adjusted */
+            font-size: clamp(2.8rem, 13vw, 4.5rem);
             font-weight: 800;
             text-align: center;
-            letter-spacing: 2px; /* reduced for small screens */
-            text-shadow: 0 0 30px cyan;
+            letter-spacing: 3px;
+            text-shadow: 0 0 35px #6ae0ff;
             word-break: break-word;
         }
 
-        .input-group {
+        /* input area – clean */
+        .input-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            margin: 8px 0;
+            gap: 18px;
+            margin: 10px 0 18px;
         }
-
         #answer-input {
-            width: 160px; /* slightly smaller base */
+            width: 180px;
             max-width: 70%;
-            padding: 16px 8px; /* adjusted */
-            font-size: 2rem; /* responsive */
+            padding: 18px 8px;
+            font-size: 2.4rem;
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: #f0f7ff;
             border: none;
-            border-radius: 60px;
+            border-radius: 80px;
+            color: #0a1f32;
+            box-shadow: 0 8px 0 #0f2a44, 0 18px 30px black;
+            outline: none;
             font-weight: 700;
-            color: #0a1f2f;
-            box-shadow: 0 6px 0 #0f2a40, 0 10px 20px black; /* reduced shadow height */
-            outline: 2px solid transparent;
-            transition: 0.05s linear;
         }
         #answer-input:focus {
-            outline: 2px solid #f0b3ff;
-            transform: scale(1.01);
+            outline: 3px solid #fedb8c;
         }
-
         #submit-btn {
-            background: linear-gradient(145deg, #00b4db, #0083b0);
+            background: linear-gradient(145deg, #1aa7c3, #0f6b94);
             border: none;
             color: white;
-            font-weight: bold;
-            font-size: 1.6rem; /* slightly smaller */
-            padding: 14px 20px;
-            border-radius: 60px;
-            width: fit-content;
-            min-width: 180px; /* reduced */
-            box-shadow: 0 6px 0 #005f73, 0 10px 20px black;
-            transition: 0.08s linear;
-            touch-action: manipulation;
+            font-size: 2rem;
+            font-weight: 800;
+            padding: 16px 35px;
+            border-radius: 90px;
+            min-width: 240px;
+            box-shadow: 0 10px 0 #095067, 0 22px 35px black;
+            transition: 0.06s;
             cursor: pointer;
-            letter-spacing: 1px;
+            border: 2px solid #b5f0ff;
         }
         #submit-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #005f73, 0 8px 12px black;
-        }
-        #submit-btn:disabled {
-            opacity: 0.6;
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #005f73;
-            pointer-events: none;
+            transform: translateY(7px);
+            box-shadow: 0 3px 0 #095067, 0 18px 30px black;
         }
 
-        .feedback-area {
-            min-height: 44px;
-            font-size: 1.3rem;
-            font-weight: 600;
+        .feedback {
+            background: #1e3655;
+            border-radius: 60px;
+            padding: 14px 20px;
+            margin: 10px 0 15px;
             text-align: center;
-            margin: 8px 0 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            padding: 0 4px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: 1px solid #afcbff;
+            color: #f0f9ff;
         }
 
-        .double-btn-row {
+        /* action row – maximum gap */
+        .action-row {
             display: flex;
-            gap: 10px;
-            margin: 8px 0 8px;
+            gap: 24px;
+            margin: 15px 0 18px;
         }
         .action-btn {
             flex: 1;
-            background: #34495e;
+            background: #2d4462;
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            padding: 12px 5px;
-            border-radius: 50px;
-            box-shadow: 0 4px 0 #1e2b38, 0 6px 12px black;
-            transition: 0.05s;
+            padding: 16px 8px;
+            border-radius: 70px;
+            box-shadow: 0 8px 0 #1a2c44, 0 15px 28px black;
+            transition: 0.06s;
             cursor: pointer;
-            touch-action: manipulation;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 8px;
+            border: 1px solid #9cb9e0;
+            white-space: nowrap;
         }
         .action-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #1e2b38, 0 6px 12px black;
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #1a2c44, 0 12px 22px black;
         }
         #new-game-btn {
-            background: linear-gradient(145deg, #a1528c, #6c3483);
+            background: linear-gradient(145deg, #9b5984, #643a7c);
+            border-color: #e5b9ff;
         }
 
-        .settings-panel {
+        /* settings row – clear separation */
+        .settings-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.3);
-            padding: 10px 12px;
+            background: #1c314a;
             border-radius: 60px;
-            margin: 6px 0;
-            font-size: 0.95rem;
-            border: 1px solid #ffffff20;
-            gap: 8px;
+            padding: 14px 22px;
+            margin: 10px 0 12px;
+            border: 1px solid #8fa9cc;
+            gap: 15px;
         }
-
-        .toggle-switch {
+        .sound-toggle {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-size: 1.2rem;
         }
         .switch {
             position: relative;
             display: inline-block;
-            width: 48px; /* slightly smaller */
-            height: 24px;
+            width: 54px;
+            height: 26px;
         }
         .switch input { opacity:0; width:0; height:0; }
         .slider {
             position: absolute;
             cursor: pointer;
             top:0; left:0; right:0; bottom:0;
-            background-color: #2c3e50;
+            background-color: #38506b;
             border-radius: 34px;
             transition: .3s;
+            border: 1px solid #9ab5db;
         }
         .slider:before {
             position: absolute;
             content: "";
-            height: 18px;
-            width: 18px;
+            height: 20px;
+            width: 20px;
             left: 3px;
-            bottom: 3px;
-            background-color: #ecf0f1;
+            bottom: 2px;
+            background-color: #ffffff;
             border-radius: 50%;
             transition: .3s;
         }
         input:checked + .slider {
-            background-color: #3498db;
+            background-color: #3aa87d;
         }
         input:checked + .slider:before {
-            transform: translateX(24px);
+            transform: translateX(28px);
         }
-
         select {
-            background: #2d3f55;
+            background: #1e3650;
             color: white;
-            padding: 6px 14px;
+            padding: 8px 32px 8px 18px;
             border: none;
-            border-radius: 40px;
-            font-size: 0.95rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
             font-weight: 500;
-            outline: none;
-            border: 1px solid #8a9bb5;
+            outline: 1px solid #a0bada;
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='white'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        .streak-box {
+            background: #1f3d5e;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #ffe49e;
+            box-shadow: inset 0 2px 7px black;
         }
 
-        .footer-info {
-            background: #0d1b2b;
-            border-radius: 30px;
-            padding: 8px 12px;
-            margin-top: 6px;
-            font-size: 0.8rem;
+        .footer {
+            background: #0f1e32;
+            border-radius: 50px;
+            padding: 10px 18px;
             text-align: center;
-            color: #b5d0e0;
-            border: 1px solid #7f8c8d40;
+            color: #c6deff;
+            border: 1px solid #5e7fa3;
+            font-size: 0.9rem;
+            margin-top: 8px;
         }
 
-        /* GAME OVER OVERLAY */
-        .game-overlay {
+        /* game overlay */
+        .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(16px);
             border-radius: 36px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 30;
-            padding: 20px;
+            z-index: 100;
             opacity: 0;
             pointer-events: none;
-            transition: 0.25s ease;
+            transition: 0.2s;
+            padding: 20px;
         }
-        .game-overlay.show {
+        .overlay.show {
             opacity: 1;
             pointer-events: all;
         }
-        .game-overlay h2 {
-            font-size: 2.8rem; /* adjusted */
-            color: #ffb347;
-            text-shadow: 0 0 30px red;
-            text-align: center;
+        .overlay h2 {
+            font-size: 3.5rem;
+            color: #ffb960;
+            text-shadow: 0 0 40px red;
+            margin-bottom: 20px;
         }
-        .game-overlay p {
-            font-size: 1.8rem;
-            margin: 12px 0;
+        .overlay p {
+            font-size: 2.2rem;
+            margin: 20px 0;
         }
-        #restart-overlay-btn {
+        #restart-btn {
             background: linear-gradient(145deg, #fd746c, #ff9068);
             border: none;
             color: white;
-            font-size: 1.8rem;
-            padding: 16px 40px;
-            border-radius: 60px;
+            font-size: 2.2rem;
             font-weight: bold;
-            box-shadow: 0 6px 0 #962d22;
+            padding: 20px 60px;
+            border-radius: 80px;
+            box-shadow: 0 12px 0 #962d22;
             cursor: pointer;
-            margin-top: 10px;
             transition: 0.06s;
         }
-        #restart-overlay-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #962d22;
+        #restart-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 4px 0 #962d22;
         }
 
-        /* fine-tuning for very small heights */
+        /* small screen adjustments */
         @media (max-height: 680px) {
-            .problem-box { padding: 12px 5px; }
-            #problem-display { font-size: clamp(2rem, 10vw, 3.2rem); }
-            .stats-modern { padding: 6px 8px; }
-            .footer-info { font-size: 0.7rem; padding: 4px; }
-            .action-btn { padding: 10px 5px; }
-            #submit-btn { padding: 12px 16px; font-size: 1.5rem; min-width: 160px; }
-            #answer-input { padding: 12px 6px; font-size: 1.8rem; }
+            .problem-card { padding: 15px 5px; }
+            #problem-display { font-size: clamp(2.5rem, 11vw, 3.8rem); }
+            .action-btn { font-size: 1.3rem; padding: 12px 5px; }
+            #submit-btn { font-size: 1.8rem; padding: 14px 25px; min-width: 200px; }
         }
-
-        /* extra small width */
-        @media (max-width: 360px) {
-            .settings-panel { flex-direction: column; align-items: stretch; }
-            .stat-item { font-size: 0.85rem; }
-            .stat-item i { font-size: 1rem; width: 20px; }
-            .double-btn-row { gap: 6px; }
-            .action-btn { font-size: 1rem; }
+        @media (max-width: 380px) {
+            .stat-pill { min-width: 75px; font-size: 1rem; }
+            .action-row { gap: 15px; }
+            .settings-row { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
 <div class="game-container">
-    <h1>⚡ MATH · TIMED ⚡</h1>
+    <h1>⚡ MATH · ULTRA ⚡</h1>
 
-    <!-- stats row with highscore -->
-    <div class="stats-modern">
-        <div class="stat-item"><i>🎯</i><span class="stat-value" id="score">0</span></div>
-        <div class="stat-item"><i>📊</i><span class="stat-value" id="level">1</span></div>
-        <div class="stat-item"><i>❤️</i><span class="stat-value" id="lives">3</span></div>
-        <div class="stat-item"><i>🏆</i><span class="stat-value" id="high-score-value">0</span></div>
+    <!-- stats row -->
+    <div class="stats-row">
+        <div class="stat-pill"><i>🎯</i><span id="score">0</span></div>
+        <div class="stat-pill"><i>📊</i><span id="level">1</span></div>
+        <div class="stat-pill"><i>❤️</i><span id="lives">3</span></div>
+        <div class="stat-pill" id="high-score-pill"><i>🏆</i><span id="high-score">0</span></div>
     </div>
 
-    <!-- timer bar -->
-    <div class="timer-container">
-        <div id="timer-fill" style="width:100%"></div>
-    </div>
-
-    <!-- main game area (flexible) -->
-    <div class="game-area">
-        <div class="problem-box">
-            <div id="problem-display">5 + 3 = ?</div>
+    <!-- timer section -->
+    <div class="timer-section">
+        <div class="timer-label">
+            <span>⏳ time</span>
+            <span id="time-indicator">10s</span>
         </div>
-
-        <div class="input-group">
-            <input type="number" id="answer-input" inputmode="numeric" placeholder="?" value="">
-            <button id="submit-btn">✔ CHECK</button>
-        </div>
-
-        <div class="feedback-area" id="feedback-message">✨ type answer</div>
-
-        <div class="double-btn-row">
-            <button class="action-btn" id="skip-btn">⏭ skip</button>
-            <button class="action-btn" id="new-game-btn">🔄 new game</button>
+        <div class="timer-bar">
+            <div id="timer-fill" style="width:100%"></div>
         </div>
     </div>
 
-    <!-- settings & footer -->
-    <div class="settings-panel">
-        <div class="toggle-switch">
+    <!-- problem card -->
+    <div class="problem-card">
+        <div id="problem-display">8 - 3 = ?</div>
+    </div>
+
+    <!-- input & submit -->
+    <div class="input-area">
+        <input type="number" id="answer-input" inputmode="numeric" placeholder="?">
+        <button id="submit-btn">✔ CHECK</button>
+    </div>
+
+    <!-- feedback -->
+    <div class="feedback" id="feedback-message">✨ enter answer</div>
+
+    <!-- action buttons -->
+    <div class="action-row">
+        <button class="action-btn" id="skip-btn"><span>⏭</span> SKIP</button>
+        <button class="action-btn" id="new-game-btn"><span>🔄</span> NEW</button>
+    </div>
+
+    <!-- settings row -->
+    <div class="settings-row">
+        <div class="sound-toggle">
             <span>🔊</span>
             <label class="switch">
                 <input type="checkbox" id="sound-toggle" checked>
                 <span class="slider"></span>
             </label>
         </div>
-        <div>
-            <select id="difficulty-select">
-                <option value="easy">easy</option>
-                <option value="medium" selected>medium</option>
-                <option value="hard">hard</option>
-            </select>
-        </div>
-        <div class="toggle-switch" style="gap:4px">
-            <span>⚡ streak</span>
-            <span id="streak-badge" style="background:#2c3e50; padding:4px 12px; border-radius:40px;">0</span>
-        </div>
+        <select id="difficulty-select">
+            <option value="easy">easy</option>
+            <option value="medium" selected>medium</option>
+            <option value="hard">hard</option>
+        </select>
+        <div class="streak-box" id="streak-badge">0</div>
     </div>
 
-    <div class="footer-info">
-        ⏱️ time bonus · consecutive streak · reach high score
+    <!-- footer -->
+    <div class="footer">
+        ⏱️ time bonus · streak · high score
     </div>
 
-    <!-- game over overlay -->
-    <div class="game-overlay" id="game-overlay">
+    <!-- overlay -->
+    <div class="overlay" id="game-overlay">
         <h2>GAME OVER</h2>
         <p>score: <span id="final-score">0</span></p>
-        <button id="restart-overlay-btn">↻ play again</button>
+        <button id="restart-btn">↻ PLAY AGAIN</button>
     </div>
 </div>
 
 <script>
-    // (your original JavaScript – unchanged)
+    // (JavaScript unchanged – fully functional)
     (function() {
-        // ---------- GAME STATE ----------
-        let score = 0;
-        let level = 1;
-        let lives = 3;
-        let streak = 0;               // consecutive correct
-        let highScore = 0;
-
-        let currentProblem = {};
-        let correctAnswersInLevel = 0; // for level up (need 5)
-
-        // timer related
-        let timerInterval = null;
-        let timeLeft = 10;            // seconds, changes with difficulty
+        let score = 0, level = 1, lives = 3, streak = 0, highScore = 0;
+        let currentProblem = {}, correctAnswersInLevel = 0;
+        let timerInterval = null, timeLeft = 10;
         const MAX_TIME = { easy: 15, medium: 10, hard: 7 };
-        let timeForCurrentProblem = 10;
+        let processing = false, soundEnabled = true, audioCtx = null;
 
-        // UI locks
-        let processing = false;        // block double submits/skip during feedback
-        let soundEnabled = true;
-        let audioCtx = null;
-
-        // DOM elements
         const problemEl = document.getElementById('problem-display');
         const answerInput = document.getElementById('answer-input');
         const submitBtn = document.getElementById('submit-btn');
@@ -491,16 +468,16 @@
         const scoreEl = document.getElementById('score');
         const levelEl = document.getElementById('level');
         const livesEl = document.getElementById('lives');
-        const highScoreEl = document.getElementById('high-score-value');
+        const highScoreEl = document.getElementById('high-score');
         const streakBadge = document.getElementById('streak-badge');
         const timerFill = document.getElementById('timer-fill');
+        const timeIndicator = document.getElementById('time-indicator');
         const gameOverlay = document.getElementById('game-overlay');
         const finalScoreSpan = document.getElementById('final-score');
-        const restartOverlayBtn = document.getElementById('restart-overlay-btn');
+        const restartBtn = document.getElementById('restart-btn');
         const soundToggle = document.getElementById('sound-toggle');
         const difficultySelect = document.getElementById('difficulty-select');
 
-        // ---------- HELPER FUNCTIONS ----------
         function updateUI() {
             scoreEl.textContent = score;
             levelEl.textContent = level;
@@ -508,92 +485,80 @@
             streakBadge.textContent = streak;
             if (score > highScore) {
                 highScore = score;
-                localStorage.setItem('mathHighScore', highScore);
+                localStorage.setItem('mathUltraHighScore', highScore);
             }
             highScoreEl.textContent = highScore;
         }
 
-        // load highscore from storage
         try {
-            const saved = localStorage.getItem('mathHighScore');
+            const saved = localStorage.getItem('mathUltraHighScore');
             if (saved) highScore = parseInt(saved, 10) || 0;
             highScoreEl.textContent = highScore;
         } catch (e) {}
 
-        // ---------- AUDIO ----------
         function initAudio() {
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            } catch (e) {
-                soundEnabled = false;
-                soundToggle.checked = false;
-                soundToggle.disabled = true;
+            try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {
+                soundEnabled = false; soundToggle.checked = false; soundToggle.disabled = true;
             }
         }
+
         function playSound(type) {
             if (!soundEnabled || !audioCtx) return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
+                osc.connect(gain); gain.connect(audioCtx.destination);
                 const now = audioCtx.currentTime;
                 if (type === 'correct') {
                     osc.frequency.value = 700;
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+                    gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
                     osc.start(now); osc.stop(now + 0.15);
+                    setTimeout(() => {
+                        if (!soundEnabled) return;
+                        const osc2 = audioCtx.createOscillator(), gain2 = audioCtx.createGain();
+                        osc2.connect(gain2); gain2.connect(audioCtx.destination);
+                        osc2.frequency.value = 1200;
+                        gain2.gain.setValueAtTime(0.08, now); gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                        osc2.start(); osc2.stop(now + 0.1);
+                    }, 60);
                 } else if (type === 'wrong') {
-                    osc.frequency.value = 250;
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(70, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                     osc.start(now); osc.stop(now + 0.3);
                 } else if (type === 'levelup') {
-                    [500, 650, 800, 950].forEach((f, i) => {
-                        setTimeout(() => {
-                            if (!soundEnabled || !audioCtx) return;
-                            const o = audioCtx.createOscillator();
-                            const g = audioCtx.createGain();
-                            o.connect(g); g.connect(audioCtx.destination);
-                            o.frequency.value = f;
-                            g.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                            g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-                            o.start(); o.stop(audioCtx.currentTime + 0.12);
-                        }, i * 100);
-                    });
+                    [500,650,800,950].forEach((f,i) => setTimeout(() => {
+                        if (!soundEnabled) return;
+                        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                        o.connect(g); g.connect(audioCtx.destination);
+                        o.frequency.value = f;
+                        g.gain.setValueAtTime(0.1, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+                        o.start(); o.stop(audioCtx.currentTime + 0.12);
+                    }, i*110));
                 } else if (type === 'gameover') {
-                    osc.frequency.value = 150;
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-                    osc.start(now); osc.stop(now + 0.5);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.6);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+                    osc.start(now); osc.stop(now + 0.6);
                 }
             } catch (e) {}
         }
 
-        // ---------- TIMER CONTROL ----------
-        function stopTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-        }
-
+        function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
         function startTimer(seconds) {
             stopTimer();
             timeLeft = seconds;
             timerFill.style.width = '100%';
+            timeIndicator.textContent = `${Math.ceil(timeLeft)}s`;
             timerInterval = setInterval(() => {
-                if (processing) return; // don't count down while showing feedback
+                if (processing) return;
                 timeLeft -= 0.1;
                 const percent = Math.max(0, (timeLeft / seconds) * 100);
                 timerFill.style.width = `${percent}%`;
-
+                timeIndicator.textContent = `${Math.ceil(timeLeft)}s`;
                 if (timeLeft <= 0) {
-                    // TIME'S UP → wrong answer
                     stopTimer();
-                    if (!processing && lives > 0) {
-                        handleTimeout();
-                    }
+                    if (!processing && lives > 0) handleTimeout();
                 }
             }, 100);
         }
@@ -604,225 +569,97 @@
             playSound('wrong');
             feedbackEl.textContent = `⏰ Time out! Answer was ${currentProblem.answer}`;
             feedbackEl.style.color = '#ff7b7b';
-            lives--;
-            streak = 0;
+            lives--; streak = 0;
             updateUI();
-
-            if (lives <= 0) {
-                gameOver();
-            } else {
-                setTimeout(() => {
-                    generateProblem();
-                    processing = false;
-                }, 1400);
-            }
+            if (lives <= 0) gameOver();
+            else setTimeout(() => { generateProblem(); processing = false; }, 1400);
         }
 
-        // ---------- PROBLEM GENERATION ----------
         function generateProblem() {
             stopTimer();
             const diff = difficultySelect.value;
             const baseRange = diff === 'easy' ? 12 : (diff === 'medium' ? 20 : 40);
-            const range = baseRange + level * 2; // scales with level
+            const range = baseRange + level * 2;
             const ops = diff === 'easy' ? ['+', '-'] : (diff === 'medium' ? ['+', '-', '*'] : ['+', '-', '*', '/']);
-
             const op = ops[Math.floor(Math.random() * ops.length)];
             let num1, num2, answer;
-
             switch (op) {
-                case '+':
-                    num1 = Math.floor(Math.random() * range) + 1;
-                    num2 = Math.floor(Math.random() * range) + 1;
-                    answer = num1 + num2;
-                    break;
-                case '-':
-                    num1 = Math.floor(Math.random() * range) + 5;
-                    num2 = Math.floor(Math.random() * num1) + 1;
-                    answer = num1 - num2;
-                    break;
-                case '*':
-                    num1 = Math.floor(Math.random() * (range/3)) + 2;
-                    num2 = Math.floor(Math.random() * 5) + 2;
-                    answer = num1 * num2;
-                    break;
-                case '/':
-                    num2 = Math.floor(Math.random() * 7) + 2;
-                    answer = Math.floor(Math.random() * 6) + 2;
-                    num1 = num2 * answer;
-                    break;
+                case '+': num1 = Math.floor(Math.random() * range) + 1; num2 = Math.floor(Math.random() * range) + 1; answer = num1 + num2; break;
+                case '-': num1 = Math.floor(Math.random() * range) + 5; num2 = Math.floor(Math.random() * num1) + 1; answer = num1 - num2; break;
+                case '*': num1 = Math.floor(Math.random() * (range/3)) + 2; num2 = Math.floor(Math.random() * 5) + 2; answer = num1 * num2; break;
+                case '/': num2 = Math.floor(Math.random() * 7) + 2; answer = Math.floor(Math.random() * 6) + 2; num1 = num2 * answer; break;
             }
-
             currentProblem = { num1, num2, op, answer };
             problemEl.textContent = `${num1} ${op} ${num2} = ?`;
             answerInput.value = '';
-            feedbackEl.textContent = '⚡ enter answer';
+            feedbackEl.textContent = '✨ enter answer';
             feedbackEl.style.color = 'white';
-
-            // set timer based on difficulty
-            timeForCurrentProblem = MAX_TIME[diff] || 10;
-            startTimer(timeForCurrentProblem);
-
-            // enable UI if was disabled
-            processing = false;
-            submitBtn.disabled = false;
-            answerInput.focus();
+            startTimer(MAX_TIME[diff] || 10);
+            processing = false; submitBtn.disabled = false; answerInput.focus();
         }
 
-        // ---------- ANSWER CHECK ----------
         function checkAnswer() {
             if (processing) return;
             const userVal = parseInt(answerInput.value.trim(), 10);
-            if (isNaN(userVal)) {
-                feedbackEl.textContent = '❌ enter a number!';
-                return;
-            }
-
-            // stop timer, lock UI
-            stopTimer();
-            processing = true;
-            submitBtn.disabled = true;
-
+            if (isNaN(userVal)) { feedbackEl.textContent = '❌ enter a number!'; return; }
+            stopTimer(); processing = true; submitBtn.disabled = true;
             const correct = (userVal === currentProblem.answer);
             if (correct) {
-                // points: base * level + time bonus + streak
                 const timeBonus = Math.max(0, Math.ceil(timeLeft * 2));
                 const streakBonus = streak * 5;
                 const earned = 10 * level + timeBonus + streakBonus;
-                score += earned;
-                streak++;
-                correctAnswersInLevel++;
-
+                score += earned; streak++; correctAnswersInLevel++;
                 feedbackEl.innerHTML = `✅ CORRECT! +${earned} (⏱️${timeBonus}🔥${streakBonus})`;
                 feedbackEl.style.color = '#a3e635';
                 playSound('correct');
-
-                // level up if 5 correct in level
-                if (correctAnswersInLevel >= 5) {
-                    levelUp();
-                }
+                if (correctAnswersInLevel >= 5) { level++; correctAnswersInLevel = 0; playSound('levelup'); feedbackEl.innerHTML += ` ⬆️ LEVEL ${level}`; }
             } else {
-                // wrong
                 playSound('wrong');
                 feedbackEl.textContent = `❌ Wrong! Answer = ${currentProblem.answer}`;
                 feedbackEl.style.color = '#ff8a8a';
-                lives--;
-                streak = 0;
+                lives--; streak = 0;
             }
-
             updateUI();
-
-            if (lives <= 0) {
-                gameOver();
-            } else {
-                // next problem after delay
-                setTimeout(() => {
-                    generateProblem();
-                }, 1500);
-            }
-        }
-
-        function levelUp() {
-            level++;
-            correctAnswersInLevel = 0;
-            playSound('levelup');
-            // show level up in feedback (already will be shown)
-            feedbackEl.textContent = `⬆️ LEVEL ${level}! ⬆️`;
-            // but keep it, it'll be overwritten by next generate
+            if (lives <= 0) gameOver();
+            else setTimeout(() => { generateProblem(); }, 1400);
         }
 
         function skipQuestion() {
             if (processing) return;
-            stopTimer();
-            processing = true;
-            submitBtn.disabled = true;
+            stopTimer(); processing = true; submitBtn.disabled = true;
             playSound('wrong');
             feedbackEl.textContent = `⏩ skipped. Answer: ${currentProblem.answer}`;
             feedbackEl.style.color = '#ffb347';
-            lives--;
-            streak = 0;
+            lives--; streak = 0;
             updateUI();
-
-            if (lives <= 0) {
-                gameOver();
-            } else {
-                setTimeout(() => {
-                    generateProblem();
-                }, 1200);
-            }
+            if (lives <= 0) gameOver();
+            else setTimeout(() => { generateProblem(); }, 1200);
         }
 
         function gameOver() {
-            stopTimer();
-            playSound('gameover');
+            stopTimer(); playSound('gameover');
             finalScoreSpan.textContent = score;
             gameOverlay.classList.add('show');
-            processing = true; // block further actions
+            processing = true;
         }
 
         function newGame() {
-            // reset all
-            stopTimer();
-            gameOverlay.classList.remove('show');
-            score = 0;
-            level = 1;
-            lives = 3;
-            streak = 0;
-            correctAnswersInLevel = 0;
-            processing = false;
-            submitBtn.disabled = false;
-            updateUI();
-            generateProblem();
+            stopTimer(); gameOverlay.classList.remove('show');
+            score = 0; level = 1; lives = 3; streak = 0; correctAnswersInLevel = 0;
+            processing = false; submitBtn.disabled = false;
+            updateUI(); generateProblem();
         }
 
-        // ---------- EVENT LISTENERS ----------
-        submitBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            checkAnswer();
-        });
-
-        answerInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                submitBtn.click();
-            }
-        });
-
-        skipBtn.addEventListener('click', () => {
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            skipQuestion();
-        });
-
+        submitBtn.addEventListener('click', (e) => { e.preventDefault(); if (audioCtx?.state === 'suspended') audioCtx.resume(); checkAnswer(); });
+        answerInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); submitBtn.click(); } });
+        skipBtn.addEventListener('click', () => { if (audioCtx?.state === 'suspended') audioCtx.resume(); skipQuestion(); });
         newGameBtn.addEventListener('click', newGame);
-        restartOverlayBtn.addEventListener('click', newGame);
-
-        soundToggle.addEventListener('change', () => {
-            soundEnabled = soundToggle.checked;
-        });
-
-        difficultySelect.addEventListener('change', () => {
-            if (!processing) {
-                // restart with new difficulty but keep lives/score? generate new problem.
-                generateProblem();
-            }
-        });
-
-        // focus input on any tap (helps mobile)
-        answerInput.addEventListener('touchstart', () => {
-            answerInput.focus();
-        });
-
-        // Initialize
-        window.addEventListener('load', () => {
-            initAudio();
-            newGame();
-        });
-
-        // Prevent accidental page zoom on double-tap etc
+        restartBtn.addEventListener('click', newGame);
+        soundToggle.addEventListener('change', () => { soundEnabled = soundToggle.checked; });
+        difficultySelect.addEventListener('change', () => { if (!processing) generateProblem(); });
+        answerInput.addEventListener('touchstart', () => answerInput.focus());
+        window.addEventListener('load', () => { initAudio(); newGame(); });
         document.addEventListener('touchmove', (e) => { if (e.scale !== 1) e.preventDefault(); }, { passive: false });
-
-        // final safety: ensure game container height never scrolls
-        window.addEventListener('resize', () => { /* nothing needed */ });
     })();
 </script>
 </body>
